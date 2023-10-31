@@ -1,0 +1,34 @@
+class UrlManager():
+    """
+    url管理器
+    """
+
+    def __init__(self):初始化函数
+        self.new_urls=set()定义新的待爬取的url
+        self.old_urls=set()已经爬取的url
+
+    def add_new_url(self,url):新增url
+        if url is None or len(url)==0如果这个变量为none或者长度为0
+            return
+        if url in self.new_urls or url in self.old_urls: 判断这个url是否已经在容器里面了
+        return
+        self.new_urls.add(url)
+
+
+    def add_new_url(self,urls):批量添加urls
+        if urls is None or len(urls)==0:
+            return
+
+        for url in urls:
+            self.add_new_url(url)
+
+    def get_url(self):取出url
+        if self.has_new_url():
+            url=self.new_urls.pop()
+            self.old_urls.add(url)
+            return url
+        else:
+            return None
+
+    def has_new_url(self):是否有带爬取的url
+        return len(self.new_urls)>0
